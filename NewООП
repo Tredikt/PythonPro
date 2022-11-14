@@ -1,0 +1,58 @@
+from random import *
+
+
+class Player:
+    def __init__(self):
+        self.name = choice(names)
+        self.age = choice(ages)
+        self.magic = choice(magics)
+        self.sk = choice(cl)
+
+
+class Class(Player):
+    def __init__(self):
+        super().__init__()
+
+    def TypeOfMagic(self):
+        return '{} использует тип магии: {}'.format(self.name, self.magic)
+
+    def information(self):
+        return '{} - имя персонажа \n{} - возраст персонажа\n{} - тип магии\n{} - класс персонажа'.format(self.name, self.age, self.magic, self.sk)
+
+
+cl = ['Воин', 'Следопыт', 'Маг', 'Лучник']
+names = ['Иван', 'Саша', 'Женя', 'Яша', 'Валера']
+ages = [x for x in range(100)]
+magics = ['Огонь', 'Вода', 'Воздух', 'Земля']
+
+print('Вы хотите сами создать персонажа (в случае ответа "нет" мы сделаем это за вас\nДа/Нет')
+answer = input()
+if answer.lower() == 'нет':
+    FirstPlayer = Class()
+    print(FirstPlayer.information())
+if answer.lower() == 'да':
+    print('Дайте имя персонажу:')
+    name = input()
+    print('Здравствуйте,', name, 'сколько вам лет?')
+    age = input()
+    print('Выберите тип магии: Вода, Огонь, Земля, Воздух')
+    magic = input()
+    print('Выберите класс персонажа: Воин, Лучник, Маг, Следопыт')
+    clas = input()
+    print(f'{name}, {age}, тип магии: {magic}, класс: {clas}, всё верно?')
+    print('Да/Нет')
+    if input().lower() == 'нет':
+        print('Что вы хотите изменить?\nИмя персонажа/возраст персонажа/тип магии/класс персонажа:')
+        if input().lower() == 'имя персонажа':
+            print('Введите новое имя персонажа:')
+            name = input()
+        if input().lower() == 'возраст персонажа':
+            print('Введите новой возраст персонажа:')
+            age = input()
+        if input().lower() == 'тип магии':
+            print('Введите новый тип магии:')
+            magic = input()
+        if input().lower() == 'класс персонажа':
+            print('Введите новый класс персонажа:')
+            clas = input()
+    print(f'Имя персонажа - {name}\nВозраст персонажа - {age}\nТип магии: - {magic}\nКласс персонажа - {clas}')
