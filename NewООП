@@ -5,7 +5,7 @@ class Player1:
     def __init__(self):
         self.name = choice(names)
         self.age = choice(ages)
-        self.magic = choice(magics)
+        self.magic = magic
         self.sk = choice(cl)
 
 
@@ -29,6 +29,18 @@ class Class2(Player2):
     def __init__(self):
         super().__init__()
 
+    def setClass(self, clas):
+        self.sk = clas.lower().title()
+
+    def setAge(self, age):
+        self.age = age
+
+    def setMagic(self, magic):
+        self.magic = magic.lower().title()
+
+    def setName(self, name):
+        self.name = name.lower().title()
+
     def information(self):
         return '{} - имя персонажа \n{} - возраст персонажа\n{} - тип магии\n{} - класс персонажа'.format(self.name, self.age, self.magic, self.sk)
 
@@ -48,11 +60,24 @@ class Spells:
                 self.spells = spells
 
         if magic.lower() == 'вода':
-                spells = 'Водяной щит, Элементаль воды, Водяной кнут'
+                spells = 'Водяной щит, Элементаль воды, Цунами'
                 self.spells = spells
 
-    def spells(self):
+    def spells1(self):
         return '{}'.format(self.spells)
+
+
+class Actions(Spells):
+    def __init__(self):
+        super().__init__()
+
+    def spells2(self):
+        return 'Вам доступны заклинания:\n{}'.format(self.spells)
+
+    def chatacter(self):
+        return 'Вам доступны действия:\n1) Помочь авантюристам\n 2) Помочь гоблинам\n 3) Пойти своей дорогой'
+
+
 
 cl = ['Воин', 'Следопыт', 'Маг', 'Лучник']
 names = ['Иван', 'Саша', 'Женя', 'Яша', 'Валера']
@@ -62,10 +87,11 @@ magics = ['Огонь', 'Вода', 'Воздух', 'Земля']
 print('Вы хотите сами создать персонажа (в случае ответа "нет" мы сделаем это за вас)\nДа/Нет')
 answer = input()
 if answer.lower() == 'нет':
+    magic = choice(magics)
     FirstPlayer = Class1()
-    PlayerSpells = Spells()
     print(FirstPlayer.information())
-if answer.lower() == 'да':
+    print('\nПерсонаж успешно создан\n\n')
+elif answer.lower() == 'да':
     print('Дайте имя персонажу:')
     name = input()
     print(f'Здравствуйте, {name}, сколько вам лет?')
@@ -74,23 +100,57 @@ if answer.lower() == 'да':
     magic = input()
     print('Выберите класс персонажа: Воин, Лучник, Маг, Следопыт')
     clas = input()
-    print(f'{name}, {age}, тип магии: {magic}, класс: {clas}, всё верно?')
-    print('Да/Нет')
+    FirstPlayer = Class2()
+    print(FirstPlayer.information())
+    print('\nВсё верно?\nДа/Нет')
     if input().lower() == 'нет':
         print('Что вы хотите изменить?\nИмя персонажа/возраст персонажа/тип магии/класс персонажа:')
-        if input().lower() == 'имя персонажа':
+        change = input()
+        if change == 'имя персонажа':
             print('Введите новое имя персонажа:')
             name = input()
-        if input().lower() == 'возраст персонажа':
+            FirstPlayer.setName(name)
+        elif change == 'возраст персонажа':
             print('Введите новой возраст персонажа:')
             age = input()
-        if input().lower() == 'тип магии':
+            FirstPlayer.setAge(age)
+        elif change == 'тип магии':
             print('Введите новый тип магии:')
             magic = input()
-        if input().lower() == 'класс персонажа':
+            FirstPlayer.setMagic(magic)
+        elif change == 'класс персонажа':
             print('Введите новый класс персонажа:')
             clas = input()
-    FirstPlayer = Class2()
-    PlayerSpells = Spells()
-    print(FirstPlayer.information())
-    print(f'Так же вам доступны заклинания 1 уровня: {PlayerSpells.spells()}')
+            FirstPlayer.setClass(clas)
+        else:
+            print('Некорректный ввод')
+        print(f'\n{FirstPlayer.information()}')
+        print('\nПерсонаж успешно создан\n\n')
+    else:
+        print('\nПерсонаж успешно создан\n\n')
+else:
+    print('Некорректный ввод')
+
+
+
+print('Начинаем приключение: 1\nПосмотреть заклинания: 2')
+answer2 = input()
+if answer2 == '2':
+    sp = Spells()
+    print(sp.spells1())
+    print('Начать приключение:\nДа/нет')
+    y = input()
+    if y.lower() == 'да':
+        answer2 = '1'
+
+if answer2 == '1':
+    print('Впереди вы видите, как двух авантюристов окружила группы гоблинов')
+    a = Actions()
+    print(a.chatacter())
+    answer3 = input()
+    if answer3 == '1':
+        print('Вы успешно справляетесь с гоблинами, авантюристы благодарят вас и дарят вам Драконье ожерелье')
+    if answer3 == '2':
+        print('Во время атаки на авантюристов вас в спину убивает гоблин')
+    if answer3 == '3':
+        print('Вы разворачиваетесь и уходите, но через пару лет умираете, так как не выдержали мук совести')
