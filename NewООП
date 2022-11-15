@@ -1,7 +1,7 @@
 from random import *
 
 
-class Player:
+class Player1:
     def __init__(self):
         self.name = choice(names)
         self.age = choice(ages)
@@ -9,31 +9,66 @@ class Player:
         self.sk = choice(cl)
 
 
-class Class(Player):
+class Player2:
+    def __init__(self):
+        self.name = name.lower().title()
+        self.age = age
+        self.magic = magic.lower().title()
+        self.sk = clas.lower().title()
+
+
+class Class1(Player1):
     def __init__(self):
         super().__init__()
-
-    def TypeOfMagic(self):
-        return '{} использует тип магии: {}'.format(self.name, self.magic)
 
     def information(self):
         return '{} - имя персонажа \n{} - возраст персонажа\n{} - тип магии\n{} - класс персонажа'.format(self.name, self.age, self.magic, self.sk)
 
+
+class Class2(Player2):
+    def __init__(self):
+        super().__init__()
+
+    def information(self):
+        return '{} - имя персонажа \n{} - возраст персонажа\n{} - тип магии\n{} - класс персонажа'.format(self.name, self.age, self.magic, self.sk)
+
+
+class Spells:
+    def __init__(self):
+        if magic.lower() == 'воздух':
+                spells = 'Щит ветра, Элементаль воздуха, Полёт'
+                self.spells = spells
+
+        if magic.lower() == 'огонь':
+                spells = 'Щит огня, Элементаль огня, Взрыв'
+                self.spells = spells
+
+        if magic.lower() == 'земля':
+                spells = 'Земляной щит, Элементаль земли, Песчаный вихрь'
+                self.spells = spells
+
+        if magic.lower() == 'вода':
+                spells = 'Водяной щит, Элементаль воды, Водяной кнут'
+                self.spells = spells
+
+    def spells(self):
+        return '{}'.format(self.spells)
 
 cl = ['Воин', 'Следопыт', 'Маг', 'Лучник']
 names = ['Иван', 'Саша', 'Женя', 'Яша', 'Валера']
 ages = [x for x in range(100)]
 magics = ['Огонь', 'Вода', 'Воздух', 'Земля']
 
-print('Вы хотите сами создать персонажа (в случае ответа "нет" мы сделаем это за вас\nДа/Нет')
+print('Вы хотите сами создать персонажа (в случае ответа "нет" мы сделаем это за вас)\nДа/Нет')
 answer = input()
 if answer.lower() == 'нет':
-    FirstPlayer = Class()
+    FirstPlayer = Class1()
+    PlayerSpells = Spells()
     print(FirstPlayer.information())
 if answer.lower() == 'да':
     print('Дайте имя персонажу:')
     name = input()
-    print('Здравствуйте,', name, 'сколько вам лет?')
+    print(f'Здравствуйте, {name}, сколько вам лет?')
     age = input()
     print('Выберите тип магии: Вода, Огонь, Земля, Воздух')
     magic = input()
@@ -55,4 +90,7 @@ if answer.lower() == 'да':
         if input().lower() == 'класс персонажа':
             print('Введите новый класс персонажа:')
             clas = input()
-    print(f'Имя персонажа - {name}\nВозраст персонажа - {age}\nТип магии: - {magic}\nКласс персонажа - {clas}')
+    FirstPlayer = Class2()
+    PlayerSpells = Spells()
+    print(FirstPlayer.information())
+    print(f'Так же вам доступны заклинания 1 уровня: {PlayerSpells.spells()}')
