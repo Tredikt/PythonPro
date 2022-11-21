@@ -1,0 +1,41 @@
+class Goblin:
+    def size(self):
+        print('Гоблин - существо маленького размера')
+
+    def skill(self):
+        print('Гоблины видят в темноте')
+
+
+class Ork:
+    def size(self):
+        print('Орк - существо большого размера')
+
+    def skill(self):
+        print('Орки очень сильные')
+
+
+class Gorgona:
+    def size(self):
+        print('Медуза Горгона - существо среднего размера')
+
+    def skill(self):
+        print('Горгона может превратить в камень существо, которое посмотрит ей в глаза')
+
+
+def WhatSize(creature):
+    creature.size()
+
+def WhatSkill(creature):
+    creature.skill()
+
+goblin = Goblin()
+ork = Ork()
+gorgona = Gorgona()
+
+v = [goblin, ork, gorgona]
+
+for i in v:
+    WhatSize(i)
+print()
+for j in v:
+    WhatSkill(j)
